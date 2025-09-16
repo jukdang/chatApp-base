@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="chatFragment">
+
+	
+	
+	
+	
+	<div class="chat_wrap">
+	    <div class="chatBody chat_first scrollBar">
+		</div>
+	 	
+		<div class="chat_input">
+			<div class="input_content">
+				<textarea class="scrollBar chatInputText" maxlength="5000" rows="1" placeholder="궁금하신 내용을 물어보세요." ></textarea>
+				<div class="chat_btn_area">
+					<button title="중지" class="chatPauseBtn" style="display: none;"><i></i>중지</button>
+					<button title="전송" class="chatSubmitBtn scolor"><i class="fa-solid fa-arrow-up"></i>전송</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script th:src="@{/js/egovframework/jquery-3.6.1.min.js}"></script>
+	<script th:src="@{/js/egovframework/chatApp/min/marked.min.js}"></script>
+	<script type="module">
+		import ChatApp from "[[@{/js/egovframework/chatApp/chatApp.js}]]";
+
+ 		const components = {
+  			chatContainer: $(".chatBody"),
+  			inputArea: $(".chatInputText"),
+   		 	submitBtn: $(".chatSubmitBtn"),
+   		 	pauseBtn: $(".chatPauseBtn")
+ 		};
+
+ 		const userId = "testUser";
+ 		const sessionId = "testSession";
+		const questionId = "testQuestion";
+
+		const config = {
+      		userId: userId,
+      		sessionId: sessionId,	
+			questionId: questionId,
+      		isFdbk: false
+    	};
+
+    	const SSEUrls = {
+      		connect: "/testPath/chat/stream",
+    		stop: "/testPath/chat/stop"
+    	};
+	
+ 		const chatApp = new ChatApp(SSEUrls, components, config);
+	</script>
+	
+</div>
+   
+</html>
